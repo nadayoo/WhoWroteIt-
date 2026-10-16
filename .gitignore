@@ -1,0 +1,10 @@
+mock/
+practice_output/
+Project_CodeNet/
+__pycache__/
+data/processed_aig/
+data/features_aig/
+data/rag_aig/
+data/features/
+data/rag/
+data/rag_full/
