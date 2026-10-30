@@ -1,0 +1,87 @@
+{
+  "seed": 42,
+  "mode": "AIGCodeSet only",
+  "normalization": "line endings + BOM/NUL, rstrip each line, strip file, exactly one final newline; comments KEPT",
+  "length_window": {
+    "chars": [
+      50,
+      5000
+    ],
+    "lines": [
+      3,
+      200
+    ],
+    "applied_to": "all sources"
+  },
+  "python2_dropped": true,
+  "dedup": "exact hash on code_norm, then token-level hash ignoring comments/whitespace",
+  "dedup_priority": "human over AI, AIGCodeSet over CodeNet",
+  "imbalance_strategy": "downsample CodeNet human rows so human:AI <= 3.0 in every split, then class weights on train",
+  "class_weights_train": {
+    "0": 0.7513,
+    "1": 1.4949
+  },
+  "split": {
+    "by": "problem_id",
+    "fractions": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "tries": 500,
+    "balance_score": 0.0205,
+    "note": "val/test only contain problems that have both human and AI rows; CodeNet-only problems are train-only"
+  },
+  "counts": {
+    "train": {
+      "rows": 4670,
+      "problems": 222,
+      "human": 3108,
+      "ai": 1562,
+      "ai_by_llm": {
+        "codestral": 593,
+        "gemini": 576,
+        "codellama": 393
+      },
+      "ai_by_scenario": {
+        "from_scratch": 607,
+        "fix_runtime_error": 492,
+        "fix_wrong_answer": 463
+      }
+    },
+    "val": {
+      "rows": 1005,
+      "problems": 48,
+      "human": 669,
+      "ai": 336,
+      "ai_by_llm": {
+        "codestral": 128,
+        "gemini": 122,
+        "codellama": 86
+      },
+      "ai_by_scenario": {
+        "from_scratch": 131,
+        "fix_runtime_error": 106,
+        "fix_wrong_answer": 99
+      }
+    },
+    "test": {
+      "rows": 1009,
+      "problems": 47,
+      "human": 671,
+      "ai": 338,
+      "ai_by_llm": {
+        "codestral": 131,
+        "gemini": 125,
+        "codellama": 82
+      },
+      "ai_by_scenario": {
+        "from_scratch": 133,
+        "fix_runtime_error": 106,
+        "fix_wrong_answer": 99
+      }
+    }
+  },
+  "rag_only_rows": 0,
+  "unparsable_share_detector": 0.0417
+}

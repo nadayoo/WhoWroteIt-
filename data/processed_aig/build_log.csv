@@ -1,0 +1,15 @@
+,count
+merged_rows,7424
+after_drop_empty,7424
+py2_removed_human,63
+py2_removed_ai,7
+after_py2,7354
+length_removed_human,235
+length_removed_ai,108
+after_length_filter,7011
+dedup_exact_removed,105
+dedup_loose_removed,222
+dedup_loose_removed_ai,219
+after_dedup,6684
+final_all_rows,6684
+final_detector_rows,6684
