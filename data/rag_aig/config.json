@@ -1,0 +1,7 @@
+{
+  "backend": "st",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "n_chunks": 2677,
+  "dim": 384,
+  "faiss": true
+}
