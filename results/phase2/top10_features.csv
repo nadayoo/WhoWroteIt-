@@ -1,0 +1,11 @@
+feature,mean_human,mean_ai,auc,strength
+op_spaced_ratio,0.624,0.86,0.721,0.221
+comma_space_ratio,0.613,0.875,0.659,0.159
+line_len_mean,18.596,20.641,0.605,0.105
+trailing_ws_line_ratio,0.019,0.004,0.407,0.093
+id_snake_ratio,0.036,0.081,0.588,0.088
+ast_total_nodes,186.027,148.33,0.423,0.077
+n_print,1.804,1.446,0.429,0.071
+id_avg_len,2.455,2.973,0.568,0.068
+avg_args_per_function,0.288,0.527,0.562,0.062
+ast_frac_Return,0.002,0.005,0.558,0.058

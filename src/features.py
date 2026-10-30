@@ -28,7 +28,6 @@ import numpy as np
 import pandas as pd
 
 from wwi_normalize import is_identifier_token, token_stream
-
 warnings.filterwarnings("ignore", category=SyntaxWarning)   # ast.parse on messy student code
 
 NODE_TYPES = [

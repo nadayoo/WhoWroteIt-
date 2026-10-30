@@ -1,0 +1,4 @@
+split,rows_split,rows_features,expected_rows,ids_match_in_order,same_columns_as_train,n_feature_cols,all_nan_cols,ast_ok_rate
+train,4670,4670,4670,True,True,91,0,0.958
+val,1005,1005,1005,True,True,91,0,0.955
+test,1009,1009,1009,True,True,91,0,0.963
