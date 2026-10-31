@@ -1,0 +1,12 @@
+,codellama,codestral,gemini
+combined_lr,0.829,0.725,0.544
+embeddings_lr,0.841,0.794,0.576
+feat_lr,0.878,0.748,0.536
+feat_rf,0.866,0.71,0.48
+feat_xgb,0.793,0.702,0.4
+feat_xgb_with_trailing_ws,0.756,0.718,0.408
+tfidf_char_lr,0.805,0.756,0.544
+tfidf_char_svm,0.817,0.763,0.552
+tfidf_token_lr,0.756,0.679,0.6
+tfidf_token_svm,0.72,0.611,0.528
+length_only,0.939,0.924,0.832

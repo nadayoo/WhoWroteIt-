@@ -1,0 +1,137 @@
+error,sample_id,y_score,llm_name,scenario,code_preview,why_guess
+AI called human,aigcodeset_005544,0.03543728,gemini,fix_runtime_error,"N, K = map(int, input().split())
+X = list(map(int, input().split()))
+
+# X.sort()
+
+# print(X)
+
+mi = 0
+pl = 0
+
+_mi = []
+_pi = []
+
+fl = 0
+if X[0] < 0:
+    for i in range(N):
+        if X[i] >= 0:
+            fl = i
+            break
+
+    # print(fl)
+
+    _mi = X[:fl]
+    _mi = _mi[::-1]
+
+    for i in range(len(_mi)):
+        _mi[i] = abs(_mi[i])
+
+    _pi = X[fl:]
+
+    # print(_mi)
+    # print(_pi)
+
+
+    ans = 10000000000000000
+
+    l_mi = len(_mi)
+
+    l_pi = len(_pi)
+
+    for i in range(l_mi):
+        if K - (i+1) <= l_pi and K - (i+1) >= 0:
+            ans = min(ans, _mi[i]*2+_pi[(K-1)-(i+1)])
+",
+AI called human,aigcodeset_006399,0.04833945,gemini,fix_wrong_answer,"import sys
+import math
+import itertools
+import collections
+from collections import deque
+from collections import defaultdict
+
+sys.setrecursionlimit(1000000)
+MOD = 10 ** 9 + 7
+input = lambda: sys.stdin.readline().strip()
+
+NI = lambda: int(input())
+NMI = lambda: map(int, input().split())
+NLI = lambda: list(NMI())
+SI = lambda: input()
+
+def main():
+    N = NI()
+    A = NLI()
+    
+    ans = 0
+    for i in range(N):
+        ans += abs(A[i])
+    
+    for i in range(N - 1):
+        if A[i] * A[i + 1] < 0:
+            ans -= 2 * min(abs(A[i]), abs(A[i + 1]))
+    
+    print(ans)
+            
+
+
+if __name",
+human called AI,aigcodeset_004702,0.9143621,human,human,"mod = 10 ** 9 + 7
+class nCr():
+    def __init__(self, n):
+        self.n = n
+        self.fa = [1] * (self.n + 1)
+        self.fi = [1] * (self.n + 1)
+        for i in range(1, self.n + 1):
+            self.fa[i] = self.fa[i - 1] * i % mod
+            self.fi[i] = pow(self.fa[i], mod - 2, mod)
+    def comb(self, n, r):
+        if n < r:return 0
+        if n < 0 or r < 0:return 0
+        return self.fa[n] * self.fi[r] % mod * self.fi[n - r] % mod
+n, m, k = map(int, input().split())
+ans = 0
+c = nCr(n + m)
+for i in range(n):
+    ans += i * (n - i) * m * m
+    ans %= mod
+for i in range(m):
+    ans",
+human called AI,aigcodeset_001936,0.889431,human,human,"def euclid(x, y):
+    while x % y != 0:
+        temp = x
+        x = y
+        y = temp % y
+    return y
+
+n = int(input())
+data = list(map(int, input().split()))
+max = 0
+array = data
+for j in range(n):
+    array = data
+    array[j] = array[(j + 1) % n]
+    x = data[0]
+    for i in array:
+        if(x > i):
+            x = euclid(x, i)
+        else:
+            x = euclid(i, x)
+        if(x > max):
+            max = x
+print(max)
+",
+human called AI,aigcodeset_000660,0.8780699,human,human,"n = int(input())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+count_a = 0
+count_b = 0
+for i in range(n):
+    count_a += max(0, b[i] - a[i])
+    count_b += max(0, a[i] - b[i])
+if sum(b) >= sum(a):
+    if count_a // 2 >= count_b:
+        print(""Yes"")
+        exit()
+print(""No"")
+",

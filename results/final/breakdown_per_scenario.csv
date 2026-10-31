@@ -1,0 +1,12 @@
+,fix_runtime_error,fix_wrong_answer,from_scratch
+combined_lr,0.481,0.495,0.985
+embeddings_lr,0.642,0.586,0.895
+feat_lr,0.481,0.545,0.992
+feat_rf,0.472,0.485,0.947
+feat_xgb,0.406,0.394,0.94
+feat_xgb_with_trailing_ws,0.415,0.394,0.932
+tfidf_char_lr,0.5,0.525,0.962
+tfidf_char_svm,0.509,0.535,0.97
+tfidf_token_lr,0.472,0.545,0.917
+tfidf_token_svm,0.396,0.455,0.887
+length_only,0.887,0.848,0.932

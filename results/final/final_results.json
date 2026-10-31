@@ -1,0 +1,197 @@
+{
+  "best_model_on_validation": "feat_xgb_with_trailing_ws",
+  "thresholds_chosen_on_validation": {
+    "combined_lr": 0.54266,
+    "embeddings_lr": 0.46021,
+    "feat_lr": 0.53188,
+    "feat_rf": 0.42312,
+    "feat_xgb": 0.60162,
+    "feat_xgb_with_trailing_ws": 0.62066,
+    "tfidf_char_lr": 0.44131,
+    "tfidf_char_svm": 0.34295,
+    "tfidf_token_lr": 0.44039,
+    "tfidf_token_svm": 0.34461,
+    "always_human": 1.0,
+    "length_only": 0.38058
+  },
+  "test_metrics": {
+    "combined_lr": {
+      "n_test": 1009,
+      "test_acc": 0.7651,
+      "test_precision": 0.6399,
+      "test_recall": 0.6834,
+      "test_f1": 0.6609,
+      "test_auc": 0.8021
+    },
+    "embeddings_lr": {
+      "n_test": 1009,
+      "test_acc": 0.7364,
+      "test_precision": 0.5861,
+      "test_recall": 0.7249,
+      "test_f1": 0.6481,
+      "test_auc": 0.8109
+    },
+    "feat_lr": {
+      "n_test": 1009,
+      "test_acc": 0.7294,
+      "test_precision": 0.5795,
+      "test_recall": 0.7012,
+      "test_f1": 0.6345,
+      "test_auc": 0.7958
+    },
+    "feat_rf": {
+      "n_test": 1009,
+      "test_acc": 0.778,
+      "test_precision": 0.6707,
+      "test_recall": 0.6627,
+      "test_f1": 0.6667,
+      "test_auc": 0.8032
+    },
+    "feat_xgb": {
+      "n_test": 1009,
+      "test_acc": 0.7839,
+      "test_precision": 0.7041,
+      "test_recall": 0.6124,
+      "test_f1": 0.6551,
+      "test_auc": 0.802
+    },
+    "feat_xgb_with_trailing_ws": {
+      "n_test": 1009,
+      "test_acc": 0.7919,
+      "test_precision": 0.7238,
+      "test_recall": 0.6124,
+      "test_f1": 0.6635,
+      "test_auc": 0.8103
+    },
+    "tfidf_char_lr": {
+      "n_test": 1009,
+      "test_acc": 0.7334,
+      "test_precision": 0.5869,
+      "test_recall": 0.6893,
+      "test_f1": 0.634,
+      "test_auc": 0.8031
+    },
+    "tfidf_char_svm": {
+      "n_test": 1009,
+      "test_acc": 0.7265,
+      "test_precision": 0.5756,
+      "test_recall": 0.6982,
+      "test_f1": 0.631,
+      "test_auc": 0.8031
+    },
+    "tfidf_token_lr": {
+      "n_test": 1009,
+      "test_acc": 0.6343,
+      "test_precision": 0.4679,
+      "test_recall": 0.6686,
+      "test_f1": 0.5505,
+      "test_auc": 0.7249
+    },
+    "tfidf_token_svm": {
+      "n_test": 1009,
+      "test_acc": 0.671,
+      "test_precision": 0.5074,
+      "test_recall": 0.6065,
+      "test_f1": 0.5526,
+      "test_auc": 0.7281
+    },
+    "always_human": {
+      "n_test": 1009,
+      "test_acc": 0.665,
+      "test_precision": 0.0,
+      "test_recall": 0.0,
+      "test_f1": 0.0,
+      "test_auc": 0.5
+    },
+    "length_only": {
+      "n_test": 1009,
+      "test_acc": 0.4638,
+      "test_precision": 0.3742,
+      "test_recall": 0.8935,
+      "test_f1": 0.5275,
+      "test_auc": 0.6457
+    }
+  },
+  "validation_metrics": {
+    "combined_lr": {
+      "n_val": 1005,
+      "val_acc": 0.7672,
+      "val_f1": 0.6695,
+      "val_auc": 0.8144
+    },
+    "embeddings_lr": {
+      "n_val": 1005,
+      "val_acc": 0.7433,
+      "val_f1": 0.6456,
+      "val_auc": 0.8168
+    },
+    "feat_lr": {
+      "n_val": 1005,
+      "val_acc": 0.7294,
+      "val_f1": 0.6504,
+      "val_auc": 0.7962
+    },
+    "feat_rf": {
+      "n_val": 1005,
+      "val_acc": 0.7851,
+      "val_f1": 0.6766,
+      "val_auc": 0.8226
+    },
+    "feat_xgb": {
+      "n_val": 1005,
+      "val_acc": 0.7891,
+      "val_f1": 0.6826,
+      "val_auc": 0.8235
+    },
+    "feat_xgb_with_trailing_ws": {
+      "n_val": 1005,
+      "val_acc": 0.798,
+      "val_f1": 0.692,
+      "val_auc": 0.8358
+    },
+    "tfidf_char_lr": {
+      "n_val": 1005,
+      "val_acc": 0.7473,
+      "val_f1": 0.6462,
+      "val_auc": 0.8019
+    },
+    "tfidf_char_svm": {
+      "n_val": 1005,
+      "val_acc": 0.7453,
+      "val_f1": 0.6484,
+      "val_auc": 0.8016
+    },
+    "tfidf_token_lr": {
+      "n_val": 1005,
+      "val_acc": 0.6597,
+      "val_f1": 0.587,
+      "val_auc": 0.7441
+    },
+    "tfidf_token_svm": {
+      "n_val": 1005,
+      "val_acc": 0.6856,
+      "val_f1": 0.5885,
+      "val_auc": 0.7448
+    },
+    "always_human": {
+      "n_val": 1005,
+      "val_acc": 0.6657,
+      "val_f1": 0.0,
+      "val_auc": 0.5
+    },
+    "length_only": {
+      "n_val": 1005,
+      "val_acc": 0.4587,
+      "val_f1": 0.531,
+      "val_auc": 0.6402
+    }
+  },
+  "leakage_check": [
+    "shared problem_ids train/val: 0",
+    "shared problem_ids train/test: 0",
+    "shared problem_ids val/test: 0",
+    "shared code_hash train/val: 0",
+    "shared code_hash train/test: 0",
+    "shared code_hash val/test: 0"
+  ]
+}
