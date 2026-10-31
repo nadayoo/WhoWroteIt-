@@ -1,0 +1,30 @@
+{
+  "tfidf_token_lr": {
+    "C": 3
+  },
+  "tfidf_token_svm": {
+    "C": 0.3
+  },
+  "tfidf_char_lr": {
+    "C": 3
+  },
+  "tfidf_char_svm": {
+    "C": 0.3
+  },
+  "feat_lr": {
+    "C": 3
+  },
+  "feat_rf": {
+    "min_samples_leaf": 3,
+    "max_features": 0.3
+  },
+  "feat_xgb": {
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "n_estimators": 300
+  },
+  "combined_lr": {
+    "C": 1,
+    "w": 0.1
+  }
+}

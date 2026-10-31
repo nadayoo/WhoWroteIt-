@@ -1,0 +1,10 @@
+{
+  "best_model": "feat_xgb",
+  "threshold": 0.604524552822113,
+  "params": {
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "n_estimators": 300
+  },
+  "chosen_by": "mean(val F1, val AUC)"
+}

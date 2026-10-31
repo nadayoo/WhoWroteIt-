@@ -4,6 +4,8 @@ numpy
 scikit-learn
 scipy
 joblib
+matplotlib
+xgboost
 datasketch          # optional: --minhash near-duplicate pass
 faiss-cpu           # optional: FAISS index (falls back to numpy)
 sentence-transformers  # needed for --backend st (real embeddings)

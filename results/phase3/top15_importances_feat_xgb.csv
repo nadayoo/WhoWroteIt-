@@ -1,0 +1,16 @@
+,importance
+op_spaced_ratio,0.09620493
+comma_space_ratio,0.04855132
+avg_args_per_function,0.0439736
+id_snake_ratio,0.035418805
+max_blank_run,0.03070837
+comment_char_ratio,0.020467713
+line_len_mean,0.019890405
+tab_indent_ratio,0.019181907
+uses_sys_stdin,0.017829774
+ast_max_block_nesting,0.016680872
+ast_total_nodes,0.016597444
+ast_frac_FunctionDef,0.015829898
+comment_line_ratio,0.015326091
+ast_frac_IfExp,0.015100318
+n_print,0.015089437
