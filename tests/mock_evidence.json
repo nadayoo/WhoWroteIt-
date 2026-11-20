@@ -1,0 +1,653 @@
+[
+  {
+    "case": "human_correct",
+    "_mock": true,
+    "true_author": "human",
+    "detector": {
+      "p_ai": 0.15,
+      "threshold": 0.6045,
+      "verdict": "human",
+      "confidence": "high",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 0.4,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 0.3,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "human",
+        "meaning": "share of commas followed by a space"
+      },
+      {
+        "id": "F3",
+        "name": "ast_total_nodes",
+        "value": 240,
+        "human_mean": 186.027,
+        "ai_mean": 148.33,
+        "points_toward": "human",
+        "meaning": "total number of nodes in the syntax tree (overall program size)"
+      },
+      {
+        "id": "F4",
+        "name": "n_print",
+        "value": 3,
+        "human_mean": 1.804,
+        "ai_mean": 1.446,
+        "points_toward": "human",
+        "meaning": "number of print() calls"
+      },
+      {
+        "id": "F5",
+        "name": "id_avg_len",
+        "value": 1.9,
+        "human_mean": 2.455,
+        "ai_mean": 2.973,
+        "points_toward": "human",
+        "meaning": "average length of variable and function names"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "ID = ID ( ID ( ) )",
+        "points_toward": "human"
+      },
+      {
+        "id": "N2",
+        "ngram": "print ( ID )",
+        "points_toward": "human"
+      },
+      {
+        "id": "N3",
+        "ngram": "for ID in ID :",
+        "points_toward": "human"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      }
+    ],
+    "problem": {
+      "id": "P",
+      "problem_id": "p00000",
+      "title": "Count Even Numbers",
+      "excerpt": "Given N integers, print how many are even.",
+      "source": "given"
+    },
+    "retrieved": {
+      "human": [
+        {
+          "id": "H1",
+          "sample_id": "mock_h1",
+          "similarity": 0.81,
+          "same_problem": true,
+          "code": "n=int(input())\na=list(map(int,input().split()))\nc=0\nfor x in a:\n    if x%2==0:c+=1\nprint(c)"
+        },
+        {
+          "id": "H2",
+          "sample_id": "mock_h2",
+          "similarity": 0.77,
+          "same_problem": true,
+          "code": "N = int(input())\nA = list(map(int,input().split()))\nprint(len([i for i in A if i%2==0]))"
+        }
+      ],
+      "ai": [
+        {
+          "id": "A1",
+          "sample_id": "mock_a1",
+          "similarity": 0.79,
+          "same_problem": true,
+          "llm_name": "gemini",
+          "scenario": "from_scratch",
+          "code": "def count_even(numbers):\n    return sum(1 for x in numbers if x % 2 == 0)\n\nn = int(input())\nnums = list(map(int, input().split()))\nprint(count_even(nums))"
+        },
+        {
+          "id": "A2",
+          "sample_id": "mock_a2",
+          "similarity": 0.74,
+          "same_problem": true,
+          "llm_name": "codestral",
+          "scenario": "fix_wrong_answer",
+          "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
+        }
+      ]
+    }
+  },
+  {
+    "case": "ai_correct",
+    "_mock": true,
+    "true_author": "ai",
+    "detector": {
+      "p_ai": 0.91,
+      "threshold": 0.6045,
+      "verdict": "ai",
+      "confidence": "high",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 1.0,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "AI",
+        "meaning": "share of operators written with a space on both sides"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 1.0,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "AI",
+        "meaning": "share of commas followed by a space"
+      },
+      {
+        "id": "F3",
+        "name": "id_snake_ratio",
+        "value": 0.2,
+        "human_mean": 0.036,
+        "ai_mean": 0.081,
+        "points_toward": "AI",
+        "meaning": "share of distinct names written in snake_case"
+      },
+      {
+        "id": "F4",
+        "name": "avg_args_per_function",
+        "value": 1.5,
+        "human_mean": 0.288,
+        "ai_mean": 0.527,
+        "points_toward": "AI",
+        "meaning": "average number of arguments per function"
+      },
+      {
+        "id": "F5",
+        "name": "ast_frac_Return",
+        "value": 0.02,
+        "human_mean": 0.002,
+        "ai_mean": 0.005,
+        "points_toward": "AI",
+        "meaning": "share of syntax-tree nodes that are return statements"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "def ID ( ID ) :",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N2",
+        "ngram": "<INDENT> return ID",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N3",
+        "ngram": "ID = ID ( ID )",
+        "points_toward": "human"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      },
+      {
+        "id": "C2",
+        "text": "Consistent operator or comma spacing does not prove AI authorship; many human authors also space consistently."
+      }
+    ],
+    "problem": {
+      "id": "P",
+      "problem_id": "p00000",
+      "title": "Count Even Numbers",
+      "excerpt": "Given N integers, print how many are even.",
+      "source": "given"
+    },
+    "retrieved": {
+      "human": [
+        {
+          "id": "H1",
+          "sample_id": "mock_h1",
+          "similarity": 0.81,
+          "same_problem": true,
+          "code": "n=int(input())\na=list(map(int,input().split()))\nc=0\nfor x in a:\n    if x%2==0:c+=1\nprint(c)"
+        },
+        {
+          "id": "H2",
+          "sample_id": "mock_h2",
+          "similarity": 0.77,
+          "same_problem": true,
+          "code": "N = int(input())\nA = list(map(int,input().split()))\nprint(len([i for i in A if i%2==0]))"
+        }
+      ],
+      "ai": [
+        {
+          "id": "A1",
+          "sample_id": "mock_a1",
+          "similarity": 0.79,
+          "same_problem": true,
+          "llm_name": "gemini",
+          "scenario": "from_scratch",
+          "code": "def count_even(numbers):\n    return sum(1 for x in numbers if x % 2 == 0)\n\nn = int(input())\nnums = list(map(int, input().split()))\nprint(count_even(nums))"
+        },
+        {
+          "id": "A2",
+          "sample_id": "mock_a2",
+          "similarity": 0.74,
+          "same_problem": true,
+          "llm_name": "codestral",
+          "scenario": "fix_wrong_answer",
+          "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
+        }
+      ]
+    }
+  },
+  {
+    "case": "human_false_alarm",
+    "_mock": true,
+    "true_author": "human",
+    "detector": {
+      "p_ai": 0.68,
+      "threshold": 0.6045,
+      "verdict": "ai",
+      "confidence": "low",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 1.0,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "AI",
+        "meaning": "share of operators written with a space on both sides"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 1.0,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "AI",
+        "meaning": "share of commas followed by a space"
+      },
+      {
+        "id": "F3",
+        "name": "ast_total_nodes",
+        "value": 120,
+        "human_mean": 186.027,
+        "ai_mean": 148.33,
+        "points_toward": "AI",
+        "meaning": "total number of nodes in the syntax tree (overall program size)"
+      },
+      {
+        "id": "F4",
+        "name": "id_avg_len",
+        "value": 3.4,
+        "human_mean": 2.455,
+        "ai_mean": 2.973,
+        "points_toward": "AI",
+        "meaning": "average length of variable and function names"
+      },
+      {
+        "id": "F5",
+        "name": "n_print",
+        "value": 1,
+        "human_mean": 1.804,
+        "ai_mean": 1.446,
+        "points_toward": "AI",
+        "meaning": "number of print() calls"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "<INDENT> return ID",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N2",
+        "ngram": "print ( ID )",
+        "points_toward": "human"
+      },
+      {
+        "id": "N3",
+        "ngram": "ID = NUM",
+        "points_toward": "human"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      },
+      {
+        "id": "C2",
+        "text": "Consistent operator or comma spacing does not prove AI authorship; many human authors also space consistently."
+      },
+      {
+        "id": "C3",
+        "text": "The score is close to the decision threshold."
+      }
+    ],
+    "problem": {
+      "id": "P",
+      "problem_id": "p00000",
+      "title": "Count Even Numbers",
+      "excerpt": "Given N integers, print how many are even.",
+      "source": "given"
+    },
+    "retrieved": {
+      "human": [
+        {
+          "id": "H1",
+          "sample_id": "mock_h1",
+          "similarity": 0.81,
+          "same_problem": true,
+          "code": "n=int(input())\na=list(map(int,input().split()))\nc=0\nfor x in a:\n    if x%2==0:c+=1\nprint(c)"
+        },
+        {
+          "id": "H2",
+          "sample_id": "mock_h2",
+          "similarity": 0.77,
+          "same_problem": true,
+          "code": "N = int(input())\nA = list(map(int,input().split()))\nprint(len([i for i in A if i%2==0]))"
+        }
+      ],
+      "ai": [
+        {
+          "id": "A1",
+          "sample_id": "mock_a1",
+          "similarity": 0.79,
+          "same_problem": true,
+          "llm_name": "gemini",
+          "scenario": "from_scratch",
+          "code": "def count_even(numbers):\n    return sum(1 for x in numbers if x % 2 == 0)\n\nn = int(input())\nnums = list(map(int, input().split()))\nprint(count_even(nums))"
+        },
+        {
+          "id": "A2",
+          "sample_id": "mock_a2",
+          "similarity": 0.74,
+          "same_problem": true,
+          "llm_name": "codestral",
+          "scenario": "fix_wrong_answer",
+          "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
+        }
+      ]
+    }
+  },
+  {
+    "case": "ai_missed",
+    "_mock": true,
+    "true_author": "ai",
+    "detector": {
+      "p_ai": 0.35,
+      "threshold": 0.6045,
+      "verdict": "human",
+      "confidence": "low",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 0.55,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 0.5,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "human",
+        "meaning": "share of commas followed by a space"
+      },
+      {
+        "id": "F3",
+        "name": "id_avg_len",
+        "value": 2.0,
+        "human_mean": 2.455,
+        "ai_mean": 2.973,
+        "points_toward": "human",
+        "meaning": "average length of variable and function names"
+      },
+      {
+        "id": "F4",
+        "name": "ast_total_nodes",
+        "value": 210,
+        "human_mean": 186.027,
+        "ai_mean": 148.33,
+        "points_toward": "human",
+        "meaning": "total number of nodes in the syntax tree (overall program size)"
+      },
+      {
+        "id": "F5",
+        "name": "avg_args_per_function",
+        "value": 0.3,
+        "human_mean": 0.288,
+        "ai_mean": 0.527,
+        "points_toward": "human",
+        "meaning": "average number of arguments per function"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "for ID in ID :",
+        "points_toward": "human"
+      },
+      {
+        "id": "N2",
+        "ngram": "ID = ID ( ID ( ) )",
+        "points_toward": "human"
+      },
+      {
+        "id": "N3",
+        "ngram": "def ID ( ID ) :",
+        "points_toward": "AI"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      }
+    ],
+    "problem": {
+      "id": "P",
+      "problem_id": "p00000",
+      "title": "Count Even Numbers",
+      "excerpt": "Given N integers, print how many are even.",
+      "source": "given"
+    },
+    "retrieved": {
+      "human": [
+        {
+          "id": "H1",
+          "sample_id": "mock_h1",
+          "similarity": 0.81,
+          "same_problem": true,
+          "code": "n=int(input())\na=list(map(int,input().split()))\nc=0\nfor x in a:\n    if x%2==0:c+=1\nprint(c)"
+        },
+        {
+          "id": "H2",
+          "sample_id": "mock_h2",
+          "similarity": 0.77,
+          "same_problem": true,
+          "code": "N = int(input())\nA = list(map(int,input().split()))\nprint(len([i for i in A if i%2==0]))"
+        }
+      ],
+      "ai": [
+        {
+          "id": "A1",
+          "sample_id": "mock_a1",
+          "similarity": 0.79,
+          "same_problem": true,
+          "llm_name": "gemini",
+          "scenario": "from_scratch",
+          "code": "def count_even(numbers):\n    return sum(1 for x in numbers if x % 2 == 0)\n\nn = int(input())\nnums = list(map(int, input().split()))\nprint(count_even(nums))"
+        },
+        {
+          "id": "A2",
+          "sample_id": "mock_a2",
+          "similarity": 0.74,
+          "same_problem": true,
+          "llm_name": "codestral",
+          "scenario": "fix_wrong_answer",
+          "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
+        }
+      ]
+    }
+  },
+  {
+    "case": "unparsable",
+    "_mock": true,
+    "true_author": "human",
+    "detector": {
+      "p_ai": 0.45,
+      "threshold": 0.6045,
+      "verdict": "human",
+      "confidence": "low",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 0.7,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 0.8,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "AI",
+        "meaning": "share of commas followed by a space"
+      },
+      {
+        "id": "F3",
+        "name": "line_len_mean",
+        "value": 19.0,
+        "human_mean": 18.596,
+        "ai_mean": 20.641,
+        "points_toward": "AI",
+        "meaning": "average line length in characters"
+      },
+      {
+        "id": "F4",
+        "name": "n_print",
+        "value": 2,
+        "human_mean": 1.804,
+        "ai_mean": 1.446,
+        "points_toward": "human",
+        "meaning": "number of print() calls"
+      },
+      {
+        "id": "F5",
+        "name": "id_avg_len",
+        "value": 2.5,
+        "human_mean": 2.455,
+        "ai_mean": 2.973,
+        "points_toward": "human",
+        "meaning": "average length of variable and function names"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "print ( ID )",
+        "points_toward": "human"
+      },
+      {
+        "id": "N2",
+        "ngram": "ID = ID ( ID ( ) )",
+        "points_toward": "human"
+      },
+      {
+        "id": "N3",
+        "ngram": "ID = NUM",
+        "points_toward": "human"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      },
+      {
+        "id": "C2",
+        "text": "The code is not valid Python 3, so syntax-tree (AST) evidence is unavailable."
+      }
+    ],
+    "problem": {
+      "id": "P",
+      "problem_id": "p00000",
+      "title": "Count Even Numbers",
+      "excerpt": "Given N integers, print how many are even.",
+      "source": "inferred"
+    },
+    "retrieved": {
+      "human": [
+        {
+          "id": "H1",
+          "sample_id": "mock_h1",
+          "similarity": 0.81,
+          "same_problem": true,
+          "code": "n=int(input())\na=list(map(int,input().split()))\nc=0\nfor x in a:\n    if x%2==0:c+=1\nprint(c)"
+        },
+        {
+          "id": "H2",
+          "sample_id": "mock_h2",
+          "similarity": 0.77,
+          "same_problem": true,
+          "code": "N = int(input())\nA = list(map(int,input().split()))\nprint(len([i for i in A if i%2==0]))"
+        }
+      ],
+      "ai": [
+        {
+          "id": "A1",
+          "sample_id": "mock_a1",
+          "similarity": 0.79,
+          "same_problem": true,
+          "llm_name": "gemini",
+          "scenario": "from_scratch",
+          "code": "def count_even(numbers):\n    return sum(1 for x in numbers if x % 2 == 0)\n\nn = int(input())\nnums = list(map(int, input().split()))\nprint(count_even(nums))"
+        },
+        {
+          "id": "A2",
+          "sample_id": "mock_a2",
+          "similarity": 0.74,
+          "same_problem": false,
+          "llm_name": "codestral",
+          "scenario": "fix_wrong_answer",
+          "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
+        }
+      ]
+    }
+  }
+]
