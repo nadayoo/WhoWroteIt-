@@ -1,0 +1,609 @@
+[
+  {
+    "case": "human_1",
+    "true_author": "human",
+    "detector": {
+      "p_ai": 0.042,
+      "threshold": 0.45,
+      "verdict": "human",
+      "confidence": "high",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "max_blank_run",
+        "value": 2,
+        "human_mean": 0.887,
+        "ai_mean": 0.75,
+        "points_toward": "human",
+        "meaning": "longest run of consecutive blank lines"
+      },
+      {
+        "id": "F2",
+        "name": "op_spaced_ratio",
+        "value": 0.677,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides (a + b, not a+b); missing if the code has no operators"
+      },
+      {
+        "id": "F3",
+        "name": "comma_space_ratio",
+        "value": 0,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "human",
+        "meaning": "share of commas followed by a space (a, b rather than a,b); missing if the code has no commas"
+      },
+      {
+        "id": "F4",
+        "name": "ast_total_nodes",
+        "value": 567,
+        "human_mean": 186.027,
+        "ai_mean": 148.33,
+        "points_toward": "human",
+        "meaning": "total number of nodes in the syntax tree (overall program size)"
+      },
+      {
+        "id": "F5",
+        "name": "line_len_mean",
+        "value": 17.203,
+        "human_mean": 18.596,
+        "ai_mean": 20.641,
+        "points_toward": "human",
+        "meaning": "average line length in characters"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "<NL> <NL> <NL>",
+        "points_toward": "human"
+      },
+      {
+        "id": "N2",
+        "ngram": "ID <NL> <NL>",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N3",
+        "ngram": "True <NL> <DEDENT>",
+        "points_toward": "human"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      }
+    ],
+    "_debug": {
+      "p_ai_raw": 0.0802,
+      "verdict_confidence": 0.9584,
+      "ast_ok": true,
+      "n_lines": 74,
+      "feature_checks": [
+        {
+          "name": "max_blank_run",
+          "contribution": -0.7123,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "op_spaced_ratio",
+          "contribution": -0.4538,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comma_space_ratio",
+          "contribution": -0.4228,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "ast_total_nodes",
+          "contribution": -0.2931,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "line_len_mean",
+          "contribution": -0.1534,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        }
+      ]
+    }
+  },
+  {
+    "case": "human_2",
+    "true_author": "human",
+    "detector": {
+      "p_ai": 0.105,
+      "threshold": 0.45,
+      "verdict": "human",
+      "confidence": "high",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 0.773,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides (a + b, not a+b); missing if the code has no operators"
+      },
+      {
+        "id": "F2",
+        "name": "ast_frac_Pass",
+        "value": 0.003,
+        "human_mean": 0.0,
+        "ai_mean": 0.0,
+        "points_toward": "human",
+        "meaning": "share of all syntax-tree nodes that are pass statements"
+      },
+      {
+        "id": "F3",
+        "name": "comma_space_ratio",
+        "value": 1,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "AI",
+        "meaning": "share of commas followed by a space (a, b rather than a,b); missing if the code has no commas"
+      },
+      {
+        "id": "F4",
+        "name": "comment_line_ratio",
+        "value": 0.026,
+        "human_mean": 0.028,
+        "ai_mean": 0.044,
+        "points_toward": "human",
+        "meaning": "comment-only lines divided by non-blank lines"
+      },
+      {
+        "id": "F5",
+        "name": "id_single_letter_ratio",
+        "value": 0.459,
+        "human_mean": 0.593,
+        "ai_mean": 0.58,
+        "points_toward": "human",
+        "meaning": "share of name occurrences that are one letter (i, n, a)"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "COMMENT <NL> <NL>",
+        "points_toward": "human"
+      },
+      {
+        "id": "N2",
+        "ngram": "<NL>",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N3",
+        "ngram": "ID <NL> <NL>",
+        "points_toward": "AI"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      },
+      {
+        "id": "C2",
+        "text": "Consistent operator or comma spacing does not prove AI authorship; many human authors also space consistently."
+      }
+    ],
+    "_debug": {
+      "p_ai_raw": 0.1873,
+      "verdict_confidence": 0.8949,
+      "ast_ok": true,
+      "n_lines": 41,
+      "feature_checks": [
+        {
+          "name": "op_spaced_ratio",
+          "contribution": -0.6249,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        },
+        {
+          "name": "ast_frac_Pass",
+          "contribution": -0.616,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comma_space_ratio",
+          "contribution": 0.312,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comment_line_ratio",
+          "contribution": -0.2248,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "id_single_letter_ratio",
+          "contribution": -0.1606,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        }
+      ]
+    }
+  },
+  {
+    "case": "ai_3",
+    "true_author": "ai",
+    "detector": {
+      "p_ai": 0.125,
+      "threshold": 0.45,
+      "verdict": "human",
+      "confidence": "medium",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 0.652,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides (a + b, not a+b); missing if the code has no operators"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 0.25,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "human",
+        "meaning": "share of commas followed by a space (a, b rather than a,b); missing if the code has no commas"
+      },
+      {
+        "id": "F3",
+        "name": "comment_line_ratio",
+        "value": 0.16,
+        "human_mean": 0.028,
+        "ai_mean": 0.044,
+        "points_toward": "human",
+        "meaning": "comment-only lines divided by non-blank lines"
+      },
+      {
+        "id": "F4",
+        "name": "n_print",
+        "value": 2,
+        "human_mean": 1.804,
+        "ai_mean": 1.446,
+        "points_toward": "human",
+        "meaning": "number of print() calls"
+      },
+      {
+        "id": "F5",
+        "name": "ast_frac_UnaryOp",
+        "value": 0.017,
+        "human_mean": 0.003,
+        "ai_mean": 0.003,
+        "points_toward": "human",
+        "meaning": "share of all syntax-tree nodes that are unary operations (-x, not x)"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "<NL> <NL> COMMENT",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N2",
+        "ngram": "COMMENT <NL> ID",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N3",
+        "ngram": "ID <NL> COMMENT",
+        "points_toward": "human"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      }
+    ],
+    "_debug": {
+      "p_ai_raw": 0.2188,
+      "verdict_confidence": 0.8745,
+      "ast_ok": true,
+      "n_lines": 28,
+      "feature_checks": [
+        {
+          "name": "op_spaced_ratio",
+          "contribution": -0.521,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comma_space_ratio",
+          "contribution": -0.4928,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comment_line_ratio",
+          "contribution": -0.2324,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        },
+        {
+          "name": "n_print",
+          "contribution": -0.1314,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "ast_frac_UnaryOp",
+          "contribution": -0.1044,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        }
+      ]
+    }
+  },
+  {
+    "case": "ai_4",
+    "true_author": "ai",
+    "detector": {
+      "p_ai": 0.135,
+      "threshold": 0.45,
+      "verdict": "human",
+      "confidence": "medium",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 0.333,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "human",
+        "meaning": "share of operators written with a space on both sides (a + b, not a+b); missing if the code has no operators"
+      },
+      {
+        "id": "F2",
+        "name": "comma_space_ratio",
+        "value": 0.75,
+        "human_mean": 0.613,
+        "ai_mean": 0.875,
+        "points_toward": "human",
+        "meaning": "share of commas followed by a space (a, b rather than a,b); missing if the code has no commas"
+      },
+      {
+        "id": "F3",
+        "name": "inline_comment_ratio",
+        "value": 0.083,
+        "human_mean": 0.005,
+        "ai_mean": 0.003,
+        "points_toward": "human",
+        "meaning": "lines with code plus a trailing comment, divided by non-blank lines"
+      },
+      {
+        "id": "F4",
+        "name": "comment_line_ratio",
+        "value": 0.125,
+        "human_mean": 0.028,
+        "ai_mean": 0.044,
+        "points_toward": "human",
+        "meaning": "comment-only lines divided by non-blank lines"
+      },
+      {
+        "id": "F5",
+        "name": "comment_char_ratio",
+        "value": 0.129,
+        "human_mean": 0.027,
+        "ai_mean": 0.054,
+        "points_toward": "human",
+        "meaning": "characters inside comments divided by all characters"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "<NL> <NL> COMMENT",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N2",
+        "ngram": "COMMENT <NL> ID",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N3",
+        "ngram": "NUM * (",
+        "points_toward": "AI"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      }
+    ],
+    "_debug": {
+      "p_ai_raw": 0.2335,
+      "verdict_confidence": 0.8648,
+      "ast_ok": true,
+      "n_lines": 28,
+      "feature_checks": [
+        {
+          "name": "op_spaced_ratio",
+          "contribution": -0.6139,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comma_space_ratio",
+          "contribution": -0.4004,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        },
+        {
+          "name": "inline_comment_ratio",
+          "contribution": -0.2983,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "comment_line_ratio",
+          "contribution": -0.2859,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        },
+        {
+          "name": "comment_char_ratio",
+          "contribution": -0.1595,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        }
+      ]
+    }
+  },
+  {
+    "case": "unparsable",
+    "true_author": "human",
+    "detector": {
+      "p_ai": 0.088,
+      "threshold": 0.45,
+      "verdict": "human",
+      "confidence": "high",
+      "model": "feat_xgb"
+    },
+    "features": [
+      {
+        "id": "F1",
+        "name": "op_spaced_ratio",
+        "value": 1,
+        "human_mean": 0.624,
+        "ai_mean": 0.86,
+        "points_toward": "AI",
+        "meaning": "share of operators written with a space on both sides (a + b, not a+b); missing if the code has no operators"
+      },
+      {
+        "id": "F2",
+        "name": "line_len_std",
+        "value": 2.059,
+        "human_mean": 11.936,
+        "ai_mean": 13.278,
+        "points_toward": "human",
+        "meaning": "how much line lengths vary (standard deviation)"
+      },
+      {
+        "id": "F3",
+        "name": "line_len_mean",
+        "value": 12.6,
+        "human_mean": 18.596,
+        "ai_mean": 20.641,
+        "points_toward": "human",
+        "meaning": "average line length in characters"
+      },
+      {
+        "id": "F4",
+        "name": "n_input",
+        "value": 0,
+        "human_mean": 1.726,
+        "ai_mean": 1.54,
+        "points_toward": "AI",
+        "meaning": "number of input() calls"
+      },
+      {
+        "id": "F5",
+        "name": "id_unique_ratio",
+        "value": 0.5,
+        "human_mean": 0.337,
+        "ai_mean": 0.343,
+        "points_toward": "human",
+        "meaning": "distinct names divided by all name occurrences (low means names are reused a lot)"
+      }
+    ],
+    "ngrams": [
+      {
+        "id": "N1",
+        "ngram": "def ID",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N2",
+        "ngram": "def ID (",
+        "points_toward": "AI"
+      },
+      {
+        "id": "N3",
+        "ngram": "def",
+        "points_toward": "AI"
+      }
+    ],
+    "caveats": [
+      {
+        "id": "C1",
+        "text": "The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship."
+      },
+      {
+        "id": "C2",
+        "text": "The code is not valid Python 3, so syntax-tree (AST) evidence is unavailable."
+      },
+      {
+        "id": "C3",
+        "text": "Consistent operator or comma spacing does not prove AI authorship; many human authors also space consistently."
+      }
+    ],
+    "_debug": {
+      "p_ai_raw": 0.1592,
+      "verdict_confidence": 0.9124,
+      "ast_ok": false,
+      "n_lines": 5,
+      "feature_checks": [
+        {
+          "name": "op_spaced_ratio",
+          "contribution": 0.7619,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "line_len_std",
+          "contribution": -0.2986,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "line_len_mean",
+          "contribution": -0.2155,
+          "value_closer_to": "human",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "n_input",
+          "contribution": 0.16,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": true
+        },
+        {
+          "name": "id_unique_ratio",
+          "contribution": -0.0896,
+          "value_closer_to": "AI",
+          "agrees_with_class_means": false
+        }
+      ]
+    }
+  }
+]
