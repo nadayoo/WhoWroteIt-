@@ -5,7 +5,7 @@
     "true_author": "human",
     "detector": {
       "p_ai": 0.15,
-      "threshold": 0.6045,
+      "threshold": 0.45,
       "verdict": "human",
       "confidence": "high",
       "model": "feat_xgb"
@@ -124,6 +124,10 @@
           "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
         }
       ]
+    },
+    "submitted": {
+      "id": "S",
+      "code": "n=int(input())\na=list(map(int,input().split()))\nc=0\nfor x in a:\n    if x%2==0:\n        c+=1\nprint(c)"
     }
   },
   {
@@ -132,7 +136,7 @@
     "true_author": "ai",
     "detector": {
       "p_ai": 0.91,
-      "threshold": 0.6045,
+      "threshold": 0.45,
       "verdict": "ai",
       "confidence": "high",
       "model": "feat_xgb"
@@ -255,6 +259,10 @@
           "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
         }
       ]
+    },
+    "submitted": {
+      "id": "S",
+      "code": "def count_even(numbers):\n    \"\"\"Return how many numbers are even.\"\"\"\n    return sum(1 for number in numbers if number % 2 == 0)\n\nn = int(input())\nvalues = list(map(int, input().split()))\nprint(count_even(values))"
     }
   },
   {
@@ -263,7 +271,7 @@
     "true_author": "human",
     "detector": {
       "p_ai": 0.68,
-      "threshold": 0.6045,
+      "threshold": 0.45,
       "verdict": "ai",
       "confidence": "low",
       "model": "feat_xgb"
@@ -390,6 +398,10 @@
           "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
         }
       ]
+    },
+    "submitted": {
+      "id": "S",
+      "code": "n = int(input())\na = list(map(int, input().split()))\nans = 0\nfor i in a:\n    if i % 2 == 0:\n        ans += 1\nprint(ans)"
     }
   },
   {
@@ -398,7 +410,7 @@
     "true_author": "ai",
     "detector": {
       "p_ai": 0.35,
-      "threshold": 0.6045,
+      "threshold": 0.45,
       "verdict": "human",
       "confidence": "low",
       "model": "feat_xgb"
@@ -517,6 +529,10 @@
           "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
         }
       ]
+    },
+    "submitted": {
+      "id": "S",
+      "code": "n=int(input())\nl=list(map(int,input().split()))\ncount=0\nfor i in range(n):\n    if l[i]%2==0:\n        count+=1\nprint(count)"
     }
   },
   {
@@ -524,10 +540,10 @@
     "_mock": true,
     "true_author": "human",
     "detector": {
-      "p_ai": 0.45,
-      "threshold": 0.6045,
+      "p_ai": 0.44,
+      "threshold": 0.45,
       "verdict": "human",
-      "confidence": "low",
+      "confidence": "inconclusive",
       "model": "feat_xgb"
     },
     "features": [
@@ -602,6 +618,10 @@
       {
         "id": "C2",
         "text": "The code is not valid Python 3, so syntax-tree (AST) evidence is unavailable."
+      },
+      {
+        "id": "C3",
+        "text": "The score is close to the decision threshold."
       }
     ],
     "problem": {
@@ -648,6 +668,10 @@
           "code": "n = int(input())\nvalues = list(map(int, input().split()))\ncount = 0\nfor value in values:\n    if value % 2 == 0:\n        count += 1\nprint(count)"
         }
       ]
+    },
+    "submitted": {
+      "id": "S",
+      "code": "n = int(input())\nvals = list(map(int,input().split())\nprint(len([v for v in vals if v%2==0]))"
     }
   }
 ]

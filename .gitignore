@@ -25,3 +25,4 @@ data/external
 # ---------- Generated embeddings aligned to our splits (large) ----------
 data/features_aig/emb_*.npy
 
+.env
