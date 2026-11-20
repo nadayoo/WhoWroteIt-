@@ -1,0 +1,29 @@
+=== AUDIT of data/rag_aig/ (the Phase 1 index) ===
+config.json : {'backend': 'st', 'model': 'sentence-transformers/all-MiniLM-L6-v2', 'n_chunks': 2677, 'dim': 384, 'faiss': True}
+chunks.parquet columns: ['chunk_id', 'chunk_type', 'sample_id', 'problem_id', 'language', 'label', 'llm_name', 'scenario', 'status', 'split', 'title', 'text']
+rows: chunks=2677  embeddings=(2677, 384)
+index.faiss rows: 2677
+chunks == embeddings == index rows: True
+
+by chunk_type / split / label:
+chunk_type  split  label
+code        train  0        1082
+                   1        1595
+
+AI chunks by LLM:
+llm_name
+codestral    602
+gemini       594
+codellama    399
+AI chunks by scenario:
+scenario
+from_scratch         620
+fix_runtime_error    503
+fix_wrong_answer     472
+
+by source:
+source
+aigcodeset    2677
+
+validation/test chunks in the index: 0  -> OK for strict mode
+problem-statement chunks in the index: 0  (0 means the old index cannot find a problem from its statement -> rebuilt here)

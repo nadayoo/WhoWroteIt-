@@ -17,3 +17,17 @@ Run from the repo root:
 
 Use in the demo: `from predict import load_and_predict; load_and_predict(code_string)` returns P(AI).
 Models are fitted on train only; hyper-parameters and the decision threshold are chosen on validation only.
+## Phase 4+5 - retrieval layer (Nour)
+
+    python src/build_rag.py             # audit data/rag_aig/ + build the strict and deploy-like indexes -> data/rag_aig/v2/
+    python src/eval_retrieval.py        # ONE command: correctness tests, problem finder, coverage,
+                                        # retrieval-as-detector, usefulness sheet, leakage re-check, tables + plots
+
+| What | Where |
+|---|---|
+| `retrieve(code, problem_id=None, k_human=3, k_ai=3, mode="deploy", exclude_ids=None)` | `src/retrieve.py` |
+| Index (vectors, metadata, FAISS indexes, config) | `data/rag_aig/v2/` (small; if a file is over 100 MB it goes on the shared drive) |
+| All retrieval tables and plots | `results/phase45/` (`retrieval_results_table.csv`, `*.png`, `leakage_checks.txt`) |
+
+Modes: `strict` = train split only (use for anything that touches a detection number);
+`deploy` = all splits, always excluding the query, its exact copies and near-duplicates (cosine >= 0.98).
