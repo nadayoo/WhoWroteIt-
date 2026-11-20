@@ -1,0 +1,3 @@
+set,n,ECE raw,ECE calibrated,Brier raw,Brier calibrated,AUC raw,AUC calibrated
+validation (used to fit),1005,0.1153,0.0347,0.1653,0.1494,0.8235,0.8235
+test,1009,0.1077,0.0478,0.169,0.1545,0.802,0.802
