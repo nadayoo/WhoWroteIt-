@@ -1,6 +1,7 @@
 feature,group,meaning,points_toward,used_by_detector,caution
 n_lines_f,style,number of lines in the normalized code,not in Phase 2 top 10 (use the per-file direction),yes,
-n_chars_f,style,number of characters in the normalized code,not in Phase 2 top 10 (use the per-file direction),yes,length alone is a weak signal (length-only AUC 0.63)
+n_chars_f,style,number of characters in the normalized code,not in Phase 2 top 10 (use the per-file direction),yes,length alone is a 
+weak signal (length-only AUC 0.63)
 line_len_mean,style,average line length in characters,AI,yes,
 line_len_max,style,length of the longest line in characters,not in Phase 2 top 10 (use the per-file direction),yes,
 line_len_std,style,how much line lengths vary (standard deviation),not in Phase 2 top 10 (use the per-file direction),yes,

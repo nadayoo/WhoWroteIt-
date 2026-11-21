@@ -36,7 +36,8 @@ CACHE = OUT / "cache"
 LOG = OUT / "llm_log.jsonl"
 MAX_WORDS = 200                       # the prompt asks for ~150; this is the hard limit for the check
 EXAMPLE_LINES = 25                    # retrieved code is truncated to this many lines
-NOT_FOR_LLM = {"case", "true_author"}  # mock-only fields that would leak the answer
+NOT_FOR_LLM = {"case", "true_author"}
+RET_DROP = {"sample_id", "label", "split", "code_hash", "problem_id"}   # ids and labels of retrieved examples leak the class  # mock-only fields that would leak the answer
 
 
 def get_model() -> str:
@@ -56,6 +57,10 @@ def clean_for_llm(ev: dict) -> dict:
     for side in ("human", "ai"):
         for it in (c.get("retrieved") or {}).get(side, []):
             it["code"] = "\n".join(str(it.get("code", "")).split("\n")[:EXAMPLE_LINES])
+            for k in RET_DROP:
+                it.pop(k, None)
+    for k in ("method", "candidates"):
+        (c.get("problem") or {}).pop(k, None)
     if c.get("submitted"):
         c["submitted"]["code"] = "\n".join(str(c["submitted"].get("code", "")).split("\n")[:EXAMPLE_LINES])
     return c
@@ -77,7 +82,19 @@ def evidence_ids(clean: dict) -> set:
 
 
 # ------------------------------------------------------------------ LLM call, cache, log
-def call_llm(prompt: str) -> str:
+_LAST = [0.0]
+
+
+def _pace():
+    """Stay under the free-tier rate limit: GEMINI_RPM requests per minute (default 10)."""
+    gap = 60.0 / float(os.environ.get("GEMINI_RPM", "10"))
+    wait = _LAST[0] + gap - time.time()
+    if wait > 0:
+        time.sleep(wait)
+    _LAST[0] = time.time()
+
+
+def call_llm(prompt: str, json_mode: bool = True) -> str:
     from google import genai
     from google.genai import types
     key = os.environ.get("GEMINI_API_KEY")
@@ -87,10 +104,11 @@ def call_llm(prompt: str) -> str:
     last = None
     for attempt in range(5):
         try:
+            _pace()
             print(f"      calling {get_model()} (try {attempt + 1}/5) ...", flush=True)
-            r = client.models.generate_content(
-                model=get_model(), contents=prompt,
-                config=types.GenerateContentConfig(temperature=0, response_mime_type="application/json"))
+            cfg = {"temperature": 0, **({"response_mime_type": "application/json"} if json_mode else {})}
+            r = client.models.generate_content(model=get_model(), contents=prompt,
+                                               config=types.GenerateContentConfig(**cfg))
             return r.text
         except Exception as e:                                   # rate limits / overload -> wait and retry
             last = e
@@ -102,13 +120,13 @@ def call_llm(prompt: str) -> str:
     raise last
 
 
-def cached_call(prompt: str) -> str:
+def cached_call(prompt: str, json_mode: bool = True) -> str:
     CACHE.mkdir(parents=True, exist_ok=True)
     key = hashlib.sha256((get_model() + "\n" + prompt).encode("utf-8")).hexdigest()
     f = CACHE / f"{key}.json"
     hit = f.exists()
     t0 = time.time()
-    text = json.loads(f.read_text(encoding="utf-8"))["response"] if hit else call_llm(prompt)
+    text = json.loads(f.read_text(encoding="utf-8"))["response"] if hit else call_llm(prompt, json_mode)
     print(f"      {'cache hit' if hit else 'answer received'} ({time.time() - t0:.1f}s)", flush=True)
     if not hit:
         f.write_text(json.dumps({"response": text}), encoding="utf-8")
@@ -138,6 +156,19 @@ def _cites(out: dict) -> list:
     for k in out.get("caveats") or []:
         c += k.get("cites") or []
     return c
+
+
+ID_TXT = re.compile(r"\b(?:[FNCHA]\d+|S|P)\b")
+
+
+def _id_mismatch(out: dict) -> list:
+    """IDs written inside a sentence must also be in that sentence's own cites."""
+    items = [(out.get("summary") or "", out.get("summary_cites") or [])]
+    items += [(k.get("text", ""), k.get("cites") or []) for k in out.get("key_points") or []]
+    if out.get("comparison"):
+        items.append((out["comparison"].get("text", ""), out["comparison"].get("cites") or []))
+    items += [(k.get("text", ""), k.get("cites") or []) for k in out.get("caveats") or []]
+    return sorted({i for t, c in items for i in ID_TXT.findall(t) if i not in c})
 
 
 def _feature_names() -> list:
@@ -188,6 +219,12 @@ def run_checks(text: str, clean: dict):
     d = clean["detector"]
     if out.get("verdict") != d["verdict"] or out.get("confidence") != d["confidence"]:
         fails.append(f"(e) verdict/confidence must be copied exactly: verdict={d['verdict']}, confidence={d['confidence']}")
+    mism = _id_mismatch(out)
+    if mism:
+        fails.append(f"(b) IDs written in a sentence but missing from that sentence's cites: {mism}")
+    cav = " ".join(c["text"] for c in clean.get("caveats", [])).lower()
+    if "threshold" in blob.lower() and d["confidence"] != "inconclusive" and "threshold" not in cav:
+        fails.append('(g) mentions the decision threshold, but the confidence is not "inconclusive" and no caveat says so')
     if len(blob.split()) > MAX_WORDS:
         fails.append(f"(f) too long: {len(blob.split())} words (limit {MAX_WORDS})")
     return out, fails
@@ -253,18 +290,30 @@ def explain_from_evidence(ev: dict, use_llm: bool = True, code: str | None = Non
             "source": source, "attempts": attempts, "warnings": warnings}
 
 
-def explain(code: str, problem_text: str | None = None, use_llm: bool = True) -> dict:
-    from evidence import build_evidence
-    ev = build_evidence(code)
+def attach_retrieval(ev: dict, code: str, sample_id: str | None = None, mode: str = "deploy"):
+    """Add `problem` and `retrieved` from Nour's retrieve.py. The query itself is always excluded."""
     warn = []
-    try:                                                    # Phase 4 retrieval, if it exists yet
+    try:
         from retrieve import retrieve
-        r = retrieve(code, problem_id=None, k_human=3, k_ai=3, mode="deploy")
-        ev["problem"], ev["retrieved"] = r.get("problem"), r.get("retrieved")
+        r = retrieve(code, mode=mode, exclude_ids=[sample_id] if sample_id else None)
+        p = r.get("problem")
+        ev = {**ev, "retrieved": {"human": r["human"], "ai": r["ai"]},
+              "problem": None if not p else {"id": "P", "problem_id": p["problem_id"], "title": p.get("title") or "",
+                                             "excerpt": p.get("excerpt") or "", "source": p["source"]}}
+        warn += list(r.get("warnings") or [])
     except ImportError:
-        warn.append("retrieve.py not available yet")
+        warn.append("retrieve.py not available")
     except Exception as e:
-        warn.append(f"retrieve() failed: {e}")
+        warn.append(f"retrieve() failed: {type(e).__name__}: {e}")
+    return ev, warn
+
+
+def explain(code: str, problem_text: str | None = None, use_llm: bool = True,
+            sample_id: str | None = None, use_retrieval: bool = True) -> dict:
+    from evidence import build_evidence
+    ev, warn = build_evidence(code), []
+    if use_retrieval:
+        ev, warn = attach_retrieval(ev, code, sample_id)
     if problem_text and not ev.get("problem"):
         ev["problem"] = {"id": "P", "problem_id": None, "title": "", "excerpt": problem_text[:400], "source": "given"}
     res = explain_from_evidence(ev, use_llm=use_llm, code=code)

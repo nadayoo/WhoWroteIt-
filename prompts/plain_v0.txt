@@ -1,0 +1,4 @@
+Explain, in a short paragraph, why this Python file looks AI-written or human-written, given the detector's result and the information below. Be clear and helpful.
+
+INFORMATION (JSON):
+{evidence_json}

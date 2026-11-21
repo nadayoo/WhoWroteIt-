@@ -1,0 +1,4 @@
+variant,n,first_try_pass,valid_citations,numbers_match_evidence,unsupported_feature_mentions,verdict_contradictions,fallback_used
+evidence,120,0.767,0.833,1.0,0.0,0.0,0.033
+no_retrieval,120,0.733,0.925,1.0,0.0,0.0,0.008
+plain,120,,,0.6,0.0,,

@@ -1,0 +1,32 @@
+﻿type,sample_id,llm_name,scenario,verdict,confidence,p_ai,explanation,draft_cause
+false_alarm_spacing,aigcodeset_003585,human,human,ai,low,0.661,"The detector's analysis points toward AI authorship based on several stylistic features, though the evidence is mixed and the confidence is low.
+  - The code exhibits consistent operator and comma spacing, which is consistent with AI-generated patterns.
+  - The average line length and lack of blank lines are consistent with AI-generated code.
+  - The average number of arguments per function points toward human authorship.
+  caveat: The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship.
+  caveat: Consistent operator or comma spacing does not prove AI authorship; many human authors also space consistently.","Human code was called AI because op_spaced_ratio = 1 (human mean 0.624, AI mean 0.86), comma_space_ratio = 1 (human mean 0.613, AI mean 0.875) look AI-like; consistent spacing does not prove AI, since many humans space consistently."
+false_alarm_spacing,aigcodeset_003577,human,human,ai,low,0.638,"The detector identifies features in the submitted file S that are consistent with AI-generated code, though some indicators also point toward human authorship (F1, F2, F3, F4, F5).
+  - The comma_space_ratio, avg_args_per_function, and ast_frac_FunctionDef features point toward AI authorship.
+  - The comment_line_ratio and comment_char_ratio features point toward human authorship.
+  - The n-gram 'return' points toward AI, while the n-gram ') <NL> COMMENT' points toward human.
+  caveat: The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship.","Human code was called AI because comma_space_ratio = 1 (human mean 0.613, AI mean 0.875) look AI-like; consistent spacing does not prove AI, since many humans space consistently."
+miss_gemini,aigcodeset_006818,gemini,fix_wrong_answer,human,high,0.066,"The analysis of the submitted file S points toward human authorship based on several stylistic features, including comment usage and spacing patterns, as evidenced by F1, F2, F3, F4, and F5.
+  - The file S exhibits a higher ratio of comment lines and characters compared to typical AI-generated code, consistent with F4 and F5.
+  - The spacing around operators and commas in S is consistent with human-authored patterns rather than AI-generated averages, as shown in F2 and F3.
+  - The presence of consecutive blank lines in S aligns with human-typical formatting, supported by F1 and N2.
+  caveat: The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship.","AI code (gemini, fix_wrong_answer) was missed: max_blank_run = 2 (human mean 0.887, AI mean 0.75), op_spaced_ratio = 0.632 (human mean 0.624, AI mean 0.86) sit nearer the human mean, so the detector said human."
+miss_gemini,aigcodeset_007090,gemini,fix_runtime_error,human,high,0.089,"The code analysis points toward human authorship based on multiple stylistic features, despite some n-gram patterns associated with AI models (F1, F2, F3, F4, F5, N2, C1).
+  - Features such as comma_space_ratio, op_spaced_ratio, and comment_line_ratio are consistent with human-written code patterns (F1, F2, F3).
+  - The presence of ast_frac_Continue and specific comment_char_ratio values align with human-authored examples (F4, F5).
+  - Certain n-gram sequences like ( ID = are present, which are typically associated with AI-generated code (N2).
+  caveat: The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship.","AI code (gemini, fix_runtime_error) was missed: comma_space_ratio = 0.625 (human mean 0.613, AI mean 0.875), op_spaced_ratio = 0.692 (human mean 0.624, AI mean 0.86) sit nearer the human mean, so the detector said human."
+miss_fix_scenario,aigcodeset_005314,codestral,fix_runtime_error,human,high,0.091,"The detector identifies the code as human-authored based on several stylistic features, despite some indicators pointing toward AI usage [F1, F2, F3, F4, F5, N1, N2].
+  - The absence of spaces around operators and after commas is consistent with human-authored patterns rather than AI defaults [F1, F2].
+  - A high frequency of single-letter identifiers points toward AI, while the number of print calls and comparison nodes points toward human authorship [F3, F4, F5].
+  - Specific n-gram patterns provide conflicting evidence, with some suggesting AI and others human authorship [N1, N2, N3].
+  caveat: The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship.","AI code (codestral, fix_runtime_error) was missed: op_spaced_ratio = 0 (human mean 0.624, AI mean 0.86), comma_space_ratio = 0 (human mean 0.613, AI mean 0.875) sit nearer the human mean, so the detector said human."
+miss_fix_scenario,aigcodeset_007252,codestral,fix_wrong_answer,human,high,0.106,"The detector identifies the file as human-written based on several stylistic and structural features, including operator spacing and syntax tree composition, though this is not definitive proof of authorship.
+  - The code exhibits a lack of spaces around operators and commas, which is consistent with human-written patterns rather than the higher spacing ratios typically seen in AI-generated code.
+  - The syntax tree structure, including the total number of nodes and the frequency of specific statement types, points toward human authorship.
+  - Specific n-gram patterns found in the code are consistent with human-written examples.
+  caveat: The detector misses about 4 in 10 AI files and about 3 in 10 of its AI verdicts are false alarms; a verdict is never proof of authorship.","AI code (codestral, fix_wrong_answer) was missed: op_spaced_ratio = 0 (human mean 0.624, AI mean 0.86), comma_space_ratio = 0 (human mean 0.613, AI mean 0.875) sit nearer the human mean, so the detector said human."

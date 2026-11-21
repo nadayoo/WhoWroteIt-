@@ -11,9 +11,12 @@ RULES
 6. Use wording such as "consistent with" or "points toward". Never say the author "is" or "must be" human or AI, and never accuse.
 7. If the evidence points in both directions, say so plainly.
 8. Include at least one caveat, taken from the caveat items (C1, ...). Always include the standing caveat if it is present.
-9. The submitted file's code is item S. Retrieved examples are H1.. (human) and A1.. (AI). Compare style ONLY by pointing to things you can actually see in S and in those examples, and cite S in the comparison. Never claim a similarity you cannot see in the code shown. If there is no S or no retrieved examples, set "comparison" to null. If a retrieved example has same_problem = false, say it comes from a different problem.
+9. The submitted file's code is item S. Retrieved examples are H1.. (human) and A1.. (AI). Compare style ONLY by pointing to things you can actually see in S 
+and in those examples, and cite S in the comparison. Never claim a similarity you cannot see in the code shown. If there is no S or no retrieved examples, set 
+"comparison" to null. If a retrieved example has same_problem = false, say it comes from a different problem.
 10. If the problem was "inferred" rather than "given", say so briefly. If there is no "problem" item, do not mention a problem.
-11. Say the score is too close to the decision threshold ONLY if the confidence is "inconclusive" or a caveat item says so; otherwise do not mention the threshold. If the confidence is "inconclusive", say plainly that the detector cannot decide reliably on this file, and still copy the verdict exactly as given.
+11. Say the score is too close to the decision threshold ONLY if the confidence is "inconclusive" or a caveat item says so; otherwise do not mention the threshold.
+ If the confidence is "inconclusive", say plainly that the detector cannot decide reliably on this file, and still copy the verdict exactly as given.
 12. Total length under 150 words.
 
 OUTPUT: reply with JSON only, no markdown, exactly this shape:
