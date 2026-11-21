@@ -1,0 +1,11 @@
+test,passed,total,ok,note
+"human results are label human, AI results are label AI",240,240,True,120 queries x 2 modes
+no exact or near duplicate of the query is returned,240,240,True,near-dup limit 0.98
+strict mode returns only train-split examples,240,240,True,
+every query gets 3 human + 3 AI examples (fill rule),240,240,True,
+query never appears in its own results (no exclude_ids given),81,81,True,81 queries that are in the corpus
+strict corpus has no validation/test ids,2586,2586,True,
+strict corpus has no validation/test problems,2586,2586,True,
+fresh embedding of raw code matches the stored vector (cos > 0.999),10,10,True,
+retrieve(code) works end to end on raw code,10,10,True,
+FAISS index gives the same neighbours as exact search,20,20,True,

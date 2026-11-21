@@ -1,0 +1,12 @@
+{
+  "backend": "st",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "dim": 384,
+  "n_code": 6684,
+  "n_strict": 2586,
+  "n_deploy": 3700,
+  "n_problem_chunks": 972,
+  "problems_with_description": 800,
+  "near_dup_sim": 0.98,
+  "with_codenet": false
+}

@@ -1,0 +1,10 @@
+Measure,Value
+Problem finder hit rate at 1 / at 5 (statement-based),0.025 / 0.042
+Problem finder hit rate at 1 / at 5 (code-neighbor vote),0.300 / 0.533
+"Same, only queries whose problem is in the corpus (vote)",0.300 / 0.533
+Queries with k human and k AI examples from the same problem (given problem),0.950
+"Same, problem inferred by the finder",0.300
+Correctness tests passed,10 of 10 tests (6253 of 6253 checks)
+Retrieval as a detector (k = 5): test F1 / AUC,0.497 / 0.642
+Retrieval as a detector (k = 15): test F1 / AUC,0.544 / 0.681
+"Saved detector, for comparison: test F1 / AUC",0.655 / 0.802

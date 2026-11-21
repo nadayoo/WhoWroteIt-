@@ -1,0 +1,4 @@
+setting,full_3h_3ai_same_problem,some_same_problem,fallback_only
+"deploy, problem given",0.95,0.05,0.0
+"deploy, problem inferred",0.5333333333333333,0.008333333333333333,0.4583333333333333
+"strict, problem given",0.0,0.0,1.0
